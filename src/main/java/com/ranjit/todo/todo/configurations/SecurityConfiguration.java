@@ -28,8 +28,9 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf-> csrf.disable())
-                .authorizeHttpRequests(auth-> auth.requestMatchers("/auth/**").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(auth-> auth.requestMatchers("auth/**").permitAll().anyRequest().authenticated())
                 .sessionManagement(sess-> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .cors(cors-> cors.disable())
 //                .cors(cors-> cors.configurationSource(corsConfigurationSource()))
                 .authenticationProvider(_authenticationProvider)
                 .addFilterBefore(_jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
